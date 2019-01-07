@@ -1,3 +1,8 @@
+// Create the array of gif search terms that will automatically load and have other search terms pushed to by the user
+var gifs = ["Wayne Rooney", "Cristiano Ronaldo", "Lionel Messi", "Zinedine Zidane"];
+
+
+
 //establish the variable used to call my API Key
 var APIKey = "Yl5s8olf34BeRpqCqC56Qt4pkzStIr5N";
 //establish the variable that will be updated to reflect whatever the user types in the add button form.
