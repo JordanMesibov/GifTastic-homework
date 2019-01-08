@@ -5,6 +5,55 @@ var gifs = ["Wayne Rooney", "Cristiano Ronaldo", "Lionel Messi", "Zinedine Zidan
 function displayGifs() {
 
   var gif = $(this).attr("data-name");
-  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=Yl5s8olf34BeRpqCqC56Qt4pkzStIr5N";
-//I am on line 48 of the working-movie-app-solved.html as a reference right now
+  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=Yl5s8olf34BeRpqCqC56Qt4pkzStIr5N&limit=10";
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+    //grab the div that will hold the gifs and have them display there
+    $("#gifs-view").prepend()
+  });
 }
+
+ // Function for displaying gif buttons
+ function renderButtons() {
+
+  // Delete the gifs prior to adding new ones
+  $("#buttonsDiv").empty();
+
+  // Looping through the array of gifs
+  for (var i = 0; i < gifs.length; i++) {
+
+    // Then dynamicaly generating buttons for each gif in the array
+    var a = $("<button>");
+    // Adding a class of gif-btn to the button
+    a.addClass("gif-btn");
+    // Adding a data-attribute
+    a.attr("data-name", gifs[i]);
+    // Providing the initial button text
+    a.text(gifs[i]);
+    // Adding the button to buttonsDiv
+    $("#buttonsDiv").append(a);
+  }
+}
+
+// This function handles events where a gif button is clicked
+$("#add-gif").on("click", function(event) {
+  event.preventDefault();
+  // This line grabs the input from the textbox
+  var gif = $("#gif-input").val().trim();
+
+  // Add the gif from the textbox to our array
+  gifs.push(gif);
+
+  // Calling renderButtons which handles the processing of our movie array
+  renderButtons();
+});
+
+// Adding a click event listener to all elements with a class of "gif-btn"
+$(document).on("click", ".gif-btn", displayGifs);
+
+// Calling the renderButtons function to display the intial buttons
+renderButtons();
