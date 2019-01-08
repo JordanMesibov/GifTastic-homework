@@ -12,15 +12,26 @@ function displayGifs() {
     method: "GET"
   }).then(function(response) {
     console.log(response);
-    //create a div for the gif to display
-    var gifDiv = $("<div>");
+    var results = response.data;
     //create an image tag
-    var gifImg = $("<img>");
-    //give the img tag a src attr from the response
-    gifImg.attr("src", results[i].images.fixed_height_still.url);
+    for (i = 0; i < results.length; i++) {
+      var gifImg = $("<img>");
+    
+      //give the img tag a src attr from the response
+      gifImg.attr({
+        src: results[i].images.fixed_width_still.url,
+        "data-still": results[i].images.fixed_width_still.url,
+        "data-animate": results[i].images.fixed_width.url,
+        "data-state": "still",
+        "class": "gif"
+      });
+  
+      //append the gif/still image to the gifs-view div from the html
+      $("#gifs-view").prepend(gifImg);
+    }
 
-    //append the gif/still image to the gifs-view div from the html
-    $("#gifs-view").prepend(gifDiv);
+
+    
   });
 }
 
@@ -61,6 +72,12 @@ $("#add-gif").on("click", function(event) {
 
 // Adding a click event listener to all elements with a class of "gif-btn"
 $(document).on("click", ".gif-btn", displayGifs);
+
+$(document).on("click", ".gif", function() {
+  // read state of image to see if it's still or animated\
+  // if still... animate
+  // else... make still again
+})
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
