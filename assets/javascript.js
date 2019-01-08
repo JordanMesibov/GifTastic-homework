@@ -12,8 +12,15 @@ function displayGifs() {
     method: "GET"
   }).then(function(response) {
     console.log(response);
-    //grab the div that will hold the gifs and have them display there
-    $("#gifs-view").prepend()
+    //create a div for the gif to display
+    var gifDiv = $("<div>");
+    //create an image tag
+    var gifImg = $("<img>");
+    //give the img tag a src attr from the response
+    gifImg.attr("src", results[i].images.fixed_height_still.url);
+
+    //append the gif/still image to the gifs-view div from the html
+    $("#gifs-view").prepend(gifDiv);
   });
 }
 
