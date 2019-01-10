@@ -5,7 +5,7 @@ var gifs = ["Wayne Rooney", "Cristiano Ronaldo", "Lionel Messi", "Zinedine Zidan
 function displayGifs() {
 
   var gif = $(this).attr("data-name");
-  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=Yl5s8olf34BeRpqCqC56Qt4pkzStIr5N&limit=10";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=Yl5s8olf34BeRpqCqC56Qt4pkzStIr5N&limit=10";
 
   $.ajax({
     url: queryURL,
